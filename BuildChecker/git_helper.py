@@ -18,9 +18,9 @@ def run_command(command: List[str], capture: bool = False) -> subprocess.Complet
     """
     Runs a command with pretty output.
     """
-    text = ' '.join(command)
     if not QUIET:
-        print("$ {}".format(text))
+        text = ' '.join(command)
+        print(f"$ {text}")
 
     sys.stdout.flush()
 
@@ -32,7 +32,7 @@ def run_command(command: List[str], capture: bool = False) -> subprocess.Complet
         completed = subprocess.run(command, cwd="..")
 
     if completed.returncode != 0:
-        print("Error: command exited with code {}!".format(completed.returncode))
+        print(f"Error: command exited with code {completed.returncode}!")
 
     return completed
 
@@ -88,7 +88,7 @@ def install_hooks():
         os.remove(str(hooks_target_dir/filename))
 
     for filename in os.listdir(str(hooks_source_dir)):
-        print("Copying hook {}".format(filename))
+        print(f"Copying hook {filename}")
         shutil.copy2(str(hooks_source_dir/filename),
                         str(hooks_target_dir/filename))
 

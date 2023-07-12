@@ -26,8 +26,8 @@ import sys
 import iconsmooth_lib
 
 if len(sys.argv) != 5:
-    print("iconsmooth.py in.png METRICS <" + iconsmooth_lib.all_conv + "> OUTPREFIX")
-    print("OUTPREFIX is something like, say, " + iconsmooth_lib.explain_prefix)
+    print(f"iconsmooth.py in.png METRICS <{iconsmooth_lib.all_conv}> OUTPREFIX")
+    print(f"OUTPREFIX is something like, say, {iconsmooth_lib.explain_prefix}")
     print(iconsmooth_lib.explain_mm)
     raise Exception("see printed help")
 
@@ -82,5 +82,5 @@ full_finale.paste(tiles[out_states[0][0]][0], (subtile_w, subtile_h))
 full_finale.paste(tiles[out_states[0][1]][1], (0, 0))
 full_finale.paste(tiles[out_states[0][2]][2], (subtile_w, 0))
 full_finale.paste(tiles[out_states[0][3]][3], (0, subtile_h))
-full_finale.save(out_prefix + "full.png")
+full_finale.save(f"{out_prefix}full.png")
 

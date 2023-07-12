@@ -17,7 +17,7 @@ ENTRY_RE = r"^ *[*-]? *(\S[^\n\r]+)\r?$"
 class NoDatesSafeLoader(yaml.SafeLoader):
     @classmethod
     def remove_implicit_resolver(cls, tag_to_remove):
-        if not 'yaml_implicit_resolvers' in cls.__dict__:
+        if 'yaml_implicit_resolvers' not in cls.__dict__:
             cls.yaml_implicit_resolvers = cls.yaml_implicit_resolvers.copy()
 
         for first_letter, mappings in cls.yaml_implicit_resolvers.items():
@@ -40,11 +40,7 @@ def main():
         current_data = yaml.load(f, Loader=NoDatesSafeLoader)
 
     entries_list: List[Any]
-    if current_data is None:
-        entries_list = []
-    else:
-        entries_list = current_data["Entries"]
-
+    entries_list = [] if current_data is None else current_data["Entries"]
     max_id = max(map(lambda e: e["id"], entries_list), default=0)
 
     for partname in os.listdir(args.parts_dir):
