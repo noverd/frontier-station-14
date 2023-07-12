@@ -61,12 +61,7 @@ def main() -> None:
     args = parser.parse_args()
     skip_build = args.skip_build
 
-    if os.path.exists("release"):
-        pass
-    #    print(Fore.BLUE + Style.DIM +
-    #          "Cleaning old release packages (release/)..." + Style.RESET_ALL)
-    #    shutil.rmtree("release")
-    else:
+    if not os.path.exists("release"):
         os.mkdir("release")
 
     if not skip_build:
@@ -85,7 +80,7 @@ def wipe_bin():
 # Be advised this is called from package_server_build during a Hybrid-ACZ build.
 def build(skip_build: bool) -> None:
     # Run a full build.
-    print(Fore.GREEN + "Building project..." + Style.RESET_ALL)
+    print(f"{Fore.GREEN}Building project...{Style.RESET_ALL}")
 
     if not skip_build:
         subprocess.run([
@@ -100,7 +95,7 @@ def build(skip_build: bool) -> None:
             "/m"
         ], check=True)
 
-    print(Fore.GREEN + "Packaging client..." + Style.RESET_ALL)
+    print(f"{Fore.GREEN}Packaging client...{Style.RESET_ALL}")
 
     client_zip = zipfile.ZipFile(
         p("release", "SS14.Client.zip"), "w",
@@ -174,9 +169,9 @@ def copy_content_assemblies(target, zipf):
 
     # Include content assemblies.
     for asm in base_assemblies:
-        files.append(asm + ".dll")
+        files.append(f"{asm}.dll")
         # If PDB available, include it aswell.
-        pdb_path = asm + ".pdb"
+        pdb_path = f"{asm}.pdb"
         if os.path.exists(p(source_dir, pdb_path)):
             files.append(pdb_path)
 

@@ -47,7 +47,7 @@ def main():
 def check_schema_version(cur: "psycopg2.cursor", ignore_mismatch: bool):
     cur.execute('SELECT "MigrationId" FROM "__EFMigrationsHistory" ORDER BY "__EFMigrationsHistory" DESC LIMIT 1')
     schema_version = cur.fetchone()
-    if schema_version == None:
+    if schema_version is None:
         print("Unable to read database schema version.")
         exit(1)
 
@@ -67,7 +67,7 @@ def normalize_user_id(cur: "psycopg2.cursor", name_or_uid: str) -> str:
 
     cur.execute("SELECT user_id FROM player WHERE last_seen_user_name = %s ORDER BY last_seen_time DESC LIMIT 1", (name_or_uid,))
     row = cur.fetchone()
-    if row == None:
+    if row is None:
         print(f"Unable to find user '{name_or_uid}' in DB.")
         exit(1)
 

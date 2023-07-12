@@ -26,8 +26,10 @@ import sys
 import iconsmooth_lib
 
 if len(sys.argv) != 5:
-    print("iconsmooth_inv.py INPREFIX METRICS <" + iconsmooth_lib.all_conv + "> out.png")
-    print("INPREFIX is something like, say, " + iconsmooth_lib.explain_prefix)
+    print(
+        f"iconsmooth_inv.py INPREFIX METRICS <{iconsmooth_lib.all_conv}> out.png"
+    )
+    print(f"INPREFIX is something like, say, {iconsmooth_lib.explain_prefix}")
     print(iconsmooth_lib.explain_mm)
     raise Exception("see printed help")
 # Input detail configuration

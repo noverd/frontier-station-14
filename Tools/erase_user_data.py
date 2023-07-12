@@ -50,7 +50,7 @@ def main():
 def check_schema_version(cur: "psycopg2.cursor", ignore_mismatch: bool):
     cur.execute('SELECT "MigrationId" FROM "__EFMigrationsHistory" ORDER BY "__EFMigrationsHistory" DESC LIMIT 1')
     schema_version = cur.fetchone()
-    if schema_version == None:
+    if schema_version is None:
         print("Unable to read database schema version.")
         exit(1)
 

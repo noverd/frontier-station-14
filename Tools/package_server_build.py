@@ -153,7 +153,7 @@ def wipe_bin():
 
 
 def build_platform(platform: PlatformReg, skip_build: bool, hybrid_acz: bool) -> None:
-    print(Fore.GREEN + f"Building project for {platform.rid}..." + Style.RESET_ALL)
+    print(f"{Fore.GREEN}Building project for {platform.rid}...{Style.RESET_ALL}")
 
     if not skip_build:
         subprocess.run([
@@ -271,9 +271,9 @@ def copy_content_assemblies(target, zipf):
 
     # Include content assemblies.
     for asm in base_assemblies:
-        files.append(asm + ".dll")
+        files.append(f"{asm}.dll")
         # If PDB available, include it aswell.
-        pdb_path = asm + ".pdb"
+        pdb_path = f"{asm}.pdb"
         if os.path.exists(p(source_dir, pdb_path)):
             files.append(pdb_path)
 
